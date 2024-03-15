@@ -51,10 +51,13 @@ socket.on('gagne', function(){
 
 
 socket.on('maj-joueurs',function (joueurs){
+    console.log(joueurs)
     joueursTable.innerHTML = '';
     for(const joueur of joueurs){
         const ligne = joueursTable.insertRow();
         let nomTd = ligne.insertCell();
         nomTd.textContent = joueur.nom;
+        let trucTd = ligne.insertCell();
+        trucTd.textContent = joueur.score;
     }
 });
