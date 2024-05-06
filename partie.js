@@ -73,7 +73,10 @@ class Joueur {
     constructor(socketId, nom){
         this.nom = nom;
         this.socketId = socketId;
+        this.score = 0;
     }
-
+    upgrade_score(){
+        this.score++;
+    }
 }
 

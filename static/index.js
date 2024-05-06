@@ -1,7 +1,9 @@
 const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
+const scoreDiv = document.getElementById('score');
 const joueursTable = document.getElementById('tableau-joueurs');
+
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -46,15 +48,17 @@ socket.on('nouvelle-cible', function(numeroCible){
 });
 
 socket.on('gagne', function(){
-    gagneDiv.textContent = "Gagné!";
+    gagneDiv.textContent = "Gagné ! ";
 });
 
 
 socket.on('maj-joueurs',function (joueurs){
     joueursTable.innerHTML = '';
     for(const joueur of joueurs){
-        const ligne = joueursTable.insertRow();
-        let nomTd = ligne.insertCell();
+        const ligne = joueursTable.insertRow(0);
+        let nomTd = ligne.insertCell(0);
         nomTd.textContent = joueur.nom;
+        let scoreTd = ligne.insertCell(1);
+        scoreTd.textContent = joueur.score;
     }
 });

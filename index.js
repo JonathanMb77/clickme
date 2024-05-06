@@ -39,6 +39,9 @@ io.on("connection", (socket) => {
       io.emit('nouvelle-cible', partie.numeroCible);
       // Envoie le message 'gagne' seulement à ce socket.
       socket.emit('gagne');
+      let joueur = partie.getJoueurById(socket.id)
+      joueur.upgrade_score();
+      io.emit('maj-joueurs', partie.joueurs);
     }
   });
 
