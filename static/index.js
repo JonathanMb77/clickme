@@ -19,6 +19,7 @@ socket.on('initialise', function(nombreCible){
     // Ajoute les cibles
     for(let i = 0; i< nombreCible; i++){
         const cible = document.createElement('div');
+        console.log("hello")
         // Ajout de la classe .cible
         cible.classList.add('cible');
         // Ajoute l'attribut 'numeroCible' à la cible
