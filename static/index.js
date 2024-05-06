@@ -2,6 +2,8 @@ const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
 const joueursTable = document.getElementById('tableau-joueurs');
+const changerNomForm = document.getElementById('changer-nom');
+const nouveauNomInput = document.getElementById('nouveau-nom');
 
 // Gère le click sur une cible
 function clickCible(event){
@@ -58,3 +60,11 @@ socket.on('maj-joueurs',function (joueurs){
         nomTd.textContent = joueur.nom;
     }
 });
+
+/** Gestion des évenements */
+
+changerNomForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    pseudo = nouveauNomInput.value
+    socket.emit('changer-nom', pseudo);
+})
