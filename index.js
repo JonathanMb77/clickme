@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 import { join, dirname } from 'node:path';
 import { Partie } from './partie.js';
+import { Joueur } from './partie.js';
 
 // Mise en place du serveur
 const app = express();
@@ -51,11 +52,12 @@ io.on("connection", (socket) => {
     io.emit('maj-joueurs', partie.joueurs);
   });
 
+  socket.on('changer-nom', (pseudo) => {
+    partie.getJoueurById(socket.id).changerNom(pseudo);
+    io.emit('maj-joueurs', partie.joueurs);
+  });
 });
 
 // Lance le serveur.
 console.log('Lance le serveur sur http://localhost:3000');
 server.listen(3000);
-
-
-

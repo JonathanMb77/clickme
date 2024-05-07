@@ -62,21 +62,26 @@ export class Partie {
 /**
  * Classe représentant un joueur.
  * ┌──────────────────┐
- * │    Partie        │
+ * │    Joueur        │
  * ├──────────────────┤
  * │ - nom            │
  * │ - socketId       │
  * ├──────────────────┤
  * └──────────────────┘
  */
-class Joueur {
+export class Joueur {
     constructor(socketId, nom){
         this.nom = nom;
         this.socketId = socketId;
         this.score = 0;
     }
+    
     upgrade_score(){
         this.score++;
+    }
+
+    changerNom(pseudo){
+        this.nom = pseudo;
     }
 }
 

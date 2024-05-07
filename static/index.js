@@ -3,6 +3,8 @@ const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
 const scoreDiv = document.getElementById('score');
 const joueursTable = document.getElementById('tableau-joueurs');
+const changerNomForm = document.getElementById('changer-nom');
+const nouveauNomInput = document.getElementById('nouveau-nom');
 
 
 // Gère le click sur une cible
@@ -62,3 +64,11 @@ socket.on('maj-joueurs',function (joueurs){
         scoreTd.textContent = joueur.score;
     }
 });
+
+/** Gestion des évenements */
+
+changerNomForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    pseudo = nouveauNomInput.value
+    socket.emit('changer-nom', pseudo);
+})
