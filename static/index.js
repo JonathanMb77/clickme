@@ -1,14 +1,24 @@
 const socket = io();
 const jeuxDiv = document.getElementById('jeu');
 const gagneDiv = document.getElementById('gagne');
+const tempsDiv = document.getElementById('temps');
 const joueursTable = document.getElementById('tableau-joueurs');
 const changerNomForm = document.getElementById('changer-nom');
 const nouveauNomInput = document.getElementById('nouveau-nom');
+var startTimer;
+var endTimer;
+var result;
 
 // Gère le click sur une cible
 function clickCible(event){
     const numeroCible = event.target.getAttribute('numeroCible');
     console.log(`click sur la cible ${numeroCible}`);
+
+    endTimer = Date.now();
+    result = endTimer - startTimer;
+    result = result/1000;
+    tempsDiv.textContent = "Tu as mis " + result + " secondes.";
+
     socket.emit('click-cible', numeroCible);
 }
 
@@ -43,6 +53,8 @@ socket.on('nouvelle-cible', function(numeroCible){
     const cible = document.querySelector(`[numeroCible="${numeroCible}"]`);
 
     cible.classList.add('clickme');
+
+    startTimer = Date.now();
 
     // Vide gagneDiv
     gagneDiv.textContent = "";
